@@ -18,23 +18,41 @@
               <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home.page') }}">Dashboard</a>
                   </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Obat
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
-                      <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
-                      <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
-                    </ul>
+                  @if (Auth::check())
+                    @if (Auth::user()->role == "admin")
+                    <li class="nav-item dropdown">
+                    </li>
+                    <li class="nav-item">
+                      <a href="{{ route('order.data') }}" class="nav-link" aria-current="page">Pembelian</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="{{ route('user.akun') }}">Kelola Akun</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Obat
+                      </a>
+                      <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{{ route('medicine.home') }}">Data Obat</a></li>
+                          <li><a class="dropdown-item" href="{{ route('medicine.create') }}">Tambah</a></li>
+                          <li><a class="dropdown-item" href="{{ route('medicine.stock') }}">Stok</a></li>
+                      </ul>
                   </li>
+                  
+                    @else
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" href="{{ route('kasir.order.create') }}">Pembelian</a>
+                    </li>
+                  @endif
+       
+                  @endif
+                  @if (Auth::check())
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Pembelian</a>
+                    <a href="{{ route('logout') }}" class="nav-link">Logout</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('user.akun') }}">Kelola Akun</a>
+                  @endif
                 </ul>
               </div>
             </div>
@@ -50,3 +68,4 @@
         @stack('script')
     </body>
 </html>
+

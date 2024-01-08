@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\AppServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -155,6 +156,7 @@ return [
     |
     */
 
+    //PROVIDERS ITU BUAT MANGGIL PAKCKAGE
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
@@ -168,6 +170,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -181,8 +185,12 @@ return [
     |
     */
 
+    //ALIASES BUAT SHORTCUT BIAR TIDKA TERLALU PANJANG
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'PDF' => Barryvdh\DomPDF\ServiceProvider::class,
+        'Excel' => Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
+
 
 ];
